@@ -1,3 +1,5 @@
+import { postData } from '../services/requests';
+
 const sendForms = () => {
 	const forms = document.querySelectorAll('form'),
 		inputs = document.querySelectorAll('input'),
@@ -25,15 +27,6 @@ const sendForms = () => {
 		upload.forEach(item => {
 			item.previousElementSibling.textContent = 'Файл не выбран';
 		});
-	};
-
-	const postData = async (url, body) => {
-		const data = await fetch(url, {
-			method: 'POST',
-			body: body,
-		});
-
-		return await data.text();
 	};
 
 	upload.forEach(item => {
@@ -88,14 +81,12 @@ const sendForms = () => {
 					img.alt = 'ok';
 
 					textMessage.textContent = phrases.success;
-					console.log(res);
 				})
 				.catch(err => {
 					img.src = phrases.fail;
 					img.alt = 'fail';
 
 					textMessage.textContent = phrases.err;
-					console.log(err);
 				})
 				.finally(() => {
 					clearInputs();
