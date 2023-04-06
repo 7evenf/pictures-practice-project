@@ -9,7 +9,6 @@ const modal = () => {
 	) => {
 		const trigger = document.querySelectorAll(triggerSelector),
 			modal = document.querySelector(modalSelector),
-			cross = document.querySelector(crossSelector),
 			gift = document.querySelector(giftSelector),
 			scroll = calcScroll();
 
@@ -36,7 +35,11 @@ const modal = () => {
 			})
 		);
 		modal.addEventListener('click', e => {
-			if (e.target == modal || e.target == cross) closeModal();
+			if (
+				e.target == modal ||
+				e.target.classList.contains(crossSelector.replace(/^\./, ''))
+			)
+				closeModal();
 		});
 	};
 
@@ -88,25 +91,14 @@ const modal = () => {
 		});
 	};
 
-	bindModal(
-		'.button-design',
-		'.popup-design',
-		'.popup-design .popup-close',
-		'.fixed-gift'
-	);
+	bindModal('.button-design', '.popup-design', '.popup-close', '.fixed-gift');
 	bindModal(
 		'.card-block .button-consultation',
 		'.popup-consultation',
-		'.popup-consultation .popup-close',
+		'.popup-close',
 		'.fixed-gift'
 	);
-	bindModal(
-		'.fixed-gift',
-		'.popup-gift',
-		'.popup-gift .popup-close',
-		'.fixed-gift',
-		true
-	);
+	bindModal('.fixed-gift', '.popup-gift', '.popup-close', '.fixed-gift', true);
 	openByScroll('.fixed-gift');
 	showModalByTime('.popup-design', '.fixed-gift', 60000);
 };
