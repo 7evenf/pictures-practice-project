@@ -71,7 +71,9 @@ const modal = () => {
 			document.body.classList.add('modal-open');
 			let scroll = calcScroll();
 			document.body.style.marginRight = `${scroll}px`;
-			gift.style.marginRight = `${scroll}px`;
+			if (gift) {
+				gift.style.marginRight = `${scroll}px`;
+			}
 		}, time);
 	};
 
